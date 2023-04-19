@@ -1,0 +1,19 @@
+# Basic provisioning example
+- name: Ansible test
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  tags: provisioning
+  tasks:
+  - name: start an instance with a public IP address
+    amazon.aws.ec2_instance:
+      name: "arun-dummy"
+      key_name: "arun-apache"
+      instance_type: t2.micro
+      security_group: default
+      network:
+        assign_public_ip: true
+      image_id: ami-02eb7a4783e7e9317
+      tags:
+        Environment: Testing
+      region: ap-south-1
